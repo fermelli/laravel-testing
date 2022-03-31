@@ -1,64 +1,59 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Tarea 1 de COM350: Pruebas Unitarias para Laravel
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Ejecutar proyecto
 
-## About Laravel
+### Clonar repositorio
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```bash
+git clone https://github.com/fermelli/laravel-testing
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Instalar dependencias
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+composer install
+```
 
-## Learning Laravel
+## Pruebas en Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+[Laravel](https://laravel.com/) está construido pensando en las pruebas. De hecho, el soporte para pruebas con `PHPUnit` se incluye de forma inmediata (out of the box) y ya se ha configurado un archivo `phpunit.xml` para su aplicación.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+`PHPUnit` es un marco de prueba orientado al programador para PHP. Es una instancia de la arquitectura xUnit para marcos de pruebas unitarias.
 
-## Laravel Sponsors
+De forma predeterminada, el directorio tests de su aplicación Laravel contiene dos directorios: `Feature` y `Unit`. Las pruebas unitarias son pruebas que se enfocan en una porción muy pequeña y aislada de su código. De hecho, la mayoría de las pruebas unitarias probablemente se centren en un solo método.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Se debe ejecutar los comandos `vendor/bin/phpunit` o `php artisan test` para ejecutar las pruebas.
 
-### Premium Partners
+## Ambientes (Environments)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Se puede crear un archivo `.env.testing` en la raíz de su proyecto. Este archivo se usará en lugar del archivo `.env` cuando se ejecuten pruebas de `PHPUnit`.
 
-## Contributing
+## Creación de pruebas
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Para crear un nuevo caso de prueba, use el comando de Artisan `make:test`. De forma predeterminada, las pruebas se colocarán en el directorio `tests/Feature`:
 
-## Code of Conduct
+```bash
+php artisan make:test UserTest
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Si desea crear una prueba dentro del directorio `tests/Unit`, puede usar la opción `--unit` al ejecutar el comando `make:test`:
 
-## Security Vulnerabilities
+```bash
+php artisan make:test UserTest --unit
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Una vez que se ha generado la prueba, puede definir los métodos de prueba como lo haría normalmente con `PHPUnit`.
 
-## License
+## Ejecución de pruebas
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Como se mencionó anteriormente, una vez que haya escrito las pruebas, puede ejecutarlas usando `PHPUnit`:
+
+```bash
+./vendor/bin/phpunit
+```
+
+Además del comando phpunit, puede usar el comando `test` para ejecutar las pruebas. El corredor de pruebas de Artisan proporciona informes de prueba detallados para facilitar el desarrollo y la depuración:
+
+```bash
+php artisan test
+```
